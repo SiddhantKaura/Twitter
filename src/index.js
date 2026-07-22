@@ -9,7 +9,4 @@ const Comment = require("./models/comment");
 app.listen(3000, async () => {
   console.log("Server is running on port 3000");
   await connectDB();
-  const repo = new TweetRepository();
-  const tweets = await repo.getAll(0, 1);
-  console.log(tweets[0], tweets[0].contentWithEmail);
 });
