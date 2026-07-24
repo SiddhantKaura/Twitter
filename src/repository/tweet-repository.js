@@ -1,10 +1,20 @@
-const Tweet = require("../models/tweet");
+import Tweet from "../models/tweet.js";
 
 class TweetRepository {
   async create(data) {
     try {
       const tweet = await Tweet.create(data);
       return tweet;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async update(id, data) {
+    try {
+      const tweet = await Tweet.findByIdAndUpdate(id, {
+        $addToSet: { hashtags: data },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -30,15 +40,6 @@ class TweetRepository {
     }
   }
 
-  async update(id, data) {
-    try {
-      const tweet = await Tweet.findByIdAndUpdate(id, data, { new: true });
-      return tweet;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async delete(id) {
     try {
       const tweet = await Tweet.deleteOne(id);
@@ -58,4 +59,4 @@ class TweetRepository {
   }
 }
 
-module.exports = TweetRepository;
+export default TweetRepository;

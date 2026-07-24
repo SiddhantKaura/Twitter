@@ -1,10 +1,11 @@
-const express = require("express");
-const app = express();
-const connectDB = require("./config/database");
+import express from "express";
+import connectDB from "./config/database.js";
+import apiRouter from "./routes/index.js";
 
-const Tweet = require("./models/tweet");
-const TweetRepository = require("./repository/tweet-repository");
-const Comment = require("./models/comment");
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/api", apiRouter);
 
 app.listen(3000, async () => {
   console.log("Server is running on port 3000");
