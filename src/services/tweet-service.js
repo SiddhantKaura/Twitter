@@ -20,7 +20,6 @@ class TweetService {
       .map((tag) => ({ title: tag, tweets: [tweet.id] }));
     const hashtags = await this.hashtagRepository.create(tagsToBeAdded);
     const tweetTagsIds = [...existingTags, ...hashtags].map((tag) => tag.id);
-    await this.tweetRepository.update(tweet.id, tweetTagsIds);
     existingTags.forEach((tag) => {
       console.log(tag, " here");
       tag.tweets.push(tweet.id);

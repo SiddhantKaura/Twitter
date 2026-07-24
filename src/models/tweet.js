@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const tweetSchema = new mongoose.Schema(
   {
     content: { type: String, required: true, maxLength: 250 },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }],
   },
   // If we need createdAt, updatedAt proeprties.
   { timestamps: true },
